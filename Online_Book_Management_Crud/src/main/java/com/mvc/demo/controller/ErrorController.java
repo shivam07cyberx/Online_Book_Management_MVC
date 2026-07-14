@@ -9,6 +9,7 @@ public class ErrorController {
 	@ExceptionHandler(Exception.class)
 	public String errorPage() {
 		
+	
 		
 		return "error";
 	}

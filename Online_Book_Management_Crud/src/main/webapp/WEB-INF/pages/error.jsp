@@ -22,12 +22,12 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    background:linear-gradient(135deg,#ff4b5c,#6a11cb);
+    background-color: black;
 }
 
 .container{
     width:420px;
-    background:#fff;
+    background:rgb(128, 128, 128);
     padding:40px;
     border-radius:12px;
     text-align:center;
@@ -60,6 +60,7 @@ a{
     border-radius:8px;
     font-size:16px;
     transition:.3s;
+    
 }
 
 a:hover{

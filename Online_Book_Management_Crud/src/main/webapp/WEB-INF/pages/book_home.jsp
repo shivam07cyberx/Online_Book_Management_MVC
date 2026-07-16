@@ -78,7 +78,7 @@ h1{
 
 <a href="add_book_form">➕ Add Book</a>
 
-<a href="view_books">📖 View Books</a>
+<a href="view_books/0">📖 View Books</a>
 
 <a href="search_book_form">🔍 Search Book By ID</a>
 

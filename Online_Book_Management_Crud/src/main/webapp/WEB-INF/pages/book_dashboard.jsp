@@ -89,7 +89,7 @@ a{
 <th>Action</th>
 </tr>
 
-<c:forEach var="book" items="${books}">
+<c:forEach var="book" items="${books.content}">
 
 <tr>
 
@@ -103,10 +103,13 @@ a{
 
 <td>
 
-<a class="edit" href="edit?id=${book.bookId}">✏️</a>
+<a class="edit"
+   href="${pageContext.request.contextPath}/edit?id=${book.bookId}">
+    ✏️
+</a>
 
 <a class="delete"
-   href="delete?id=${book.bookId}"
+   href="${pageContext.request.contextPath}/delete?id=${book.bookId}&pageNo=${books.number}"
    onclick="return confirm('Are you sure?')">
    🗑️
 </a>
@@ -136,5 +139,25 @@ a{
 <c:if test="${not empty msg}">
     <h3 style="text-align: center; color: red; font-weight: bolder;">${msg}</h3>
 </c:if>
+
+<div style="display: flex; justify-content:space-around;">
+
+<c:if test="${books.hasPrevious()}">
+    <a style="color: orange"  href="${pageContext.request.contextPath}/view_books/${books.number - 1}">
+        Previous
+    </a>
+</c:if>
+
+
+<c:if test="${books.hasNext()}">
+    <a style="color: orange" href="${pageContext.request.contextPath}/view_books/${books.number + 1}">
+        Next
+    </a>
+</c:if>
+</div>
+
+
+<p style="text-align: center" >${books.number + 1}</p>
+
 </body>
 </html>

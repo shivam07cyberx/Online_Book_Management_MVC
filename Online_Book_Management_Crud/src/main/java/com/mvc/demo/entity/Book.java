@@ -8,6 +8,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class Book {
 	
 	@Id
-	@SequenceGenerator(name="gen1", sequenceName = "book_seq", allocationSize = 1,initialValue = 10)
-	@GeneratedValue(generator = "gen1", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Long bookId;
 	
 	@NonNull
@@ -32,12 +34,16 @@ public class Book {
 	@NonNull
 	private String category;
 	@NonNull
+	@Min(value = 50)
+	@Max(value=99999)
 	private  Double price;
 	@NonNull
 	private String publisher;
 	@NonNull
 	public LocalDate publishDate;
 	@NonNull
+	@Min(value = 1)
+	@Max(value=999)
 	public Integer stockQuantity;
 	
 	

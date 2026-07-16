@@ -4,17 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mvc.demo.entity.Book;
 import com.mvc.demo.service.IBookService;
+
+import jakarta.validation.Valid;
 
 @Controller
 
@@ -37,7 +40,7 @@ public class BookController {
 	}
 	
 	@PostMapping("/add")
-	public String addBook(@ModelAttribute Book book, RedirectAttributes redi) {
+	public String addBook(@Valid @ModelAttribute Book book, RedirectAttributes redi) {
 		
 		
 		ibs.add(book);
@@ -60,14 +63,25 @@ public class BookController {
 	return "book_dashboard";
 	
 	
-	
-		
-		
-		
-		
-
-		
 	}
+	
+	@GetMapping("/view_books/{pageNo}")
+
+	public String viewPage(@PathVariable Integer pageNo, Model model) {
+		
+		int pageSize=10;
+		
+		
+	Page book=	ibs.viewBookByPage(pageNo, pageSize);
+		
+		model.addAttribute("books", book);
+		
+		return "book_dashboard";
+	}
+	
+	
+	
+	
 	
 	@GetMapping("/edit")
 	public String editBookForm(@RequestParam Long id, Model model) {
@@ -139,13 +153,13 @@ public class BookController {
 	
 	
 	@GetMapping("/delete")
-	public String delete(@RequestParam Long id, RedirectAttributes ra) {
+	public String delete(@RequestParam Long id,@RequestParam Integer pageNo, RedirectAttributes ra) {
 		
 		ra.addFlashAttribute("msg", "record deleted");
 		
 		ibs.delete(id);
 		
-		return "redirect:/view_books";
+		return "redirect:/view_books/"+pageNo;
 		
 	}
 	

@@ -2,6 +2,8 @@ package com.mvc.demo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.mvc.demo.entity.Book;
 
 public interface IBookService {
@@ -11,4 +13,10 @@ public interface IBookService {
 public Book  searchBookById(Long id);
 
 public void delete(Long id) ;
+
+
+
+public Page<Book> viewBookByPage(int pageNo, int pagesize);
+
+
 }

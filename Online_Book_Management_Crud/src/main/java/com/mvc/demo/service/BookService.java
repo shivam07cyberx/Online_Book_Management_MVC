@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.hibernate.annotations.Audited;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.mvc.demo.entity.Book;
@@ -53,6 +56,15 @@ public class BookService implements IBookService {
 		
 		
 		 ibr.deleteById(id);
+	}
+
+
+	@Override
+	public Page<Book> viewBookByPage(int pageNo, int pagesize) {
+		Pageable pages=PageRequest.of(pageNo, pagesize);
+		
+		
+		return ibr.findAll(pages) ;
 	}
 
 }

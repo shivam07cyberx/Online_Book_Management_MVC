@@ -7,3 +7,6 @@ import com.mvc.demo.entity.Book;
 public interface IBookRepository extends JpaRepository<Book, Long>{
 
 }
+
+
+
